@@ -1,15 +1,49 @@
-//FOR
-let numero = parseInt(prompt("Ingrese un número"))
-for(let i = 3; i <= 9; i = i + 2) {
-    let resultado = numero + i;
-    let mensaje = `${numero} + ${i} = ${resultado}`;
-    alert(mensaje);
-}
+alert(
+	'Vamos a calcular el promedio de edades'
+);
 
-//WHILE
-let nombre = prompt("Ingrese un nombre")
-while(nombre === "") {
-    alert("Ingrese un nombre valido");
-    nombre = prompt("Ingrese un nombre");
-}
-alert(`¡Bienvenido ${nombre}!`)
+const cantidadPersonas = () => {
+	let cantidad = Number(prompt('Ingrese la cantidad de personas hasta 100'));
+
+	while (cantidad <= 0 || cantidad > 100) {
+		alert(
+			'Has introducido una catidad de personas no permitida.'
+		);
+		cantidad = Number(prompt('Ingrese la cantidad de personas hasta 100'));
+	}
+	ingresarEdad(cantidad);
+};
+
+const ingresarEdad = (cantidad) => {
+	let edadTotal = 0;
+	let edades = 0;
+
+	for (let i = 1; i <= cantidad; i++) {
+		edades = Number(prompt('Ingrese su edad ' + i + ':'));
+
+		if (edades > 0) {
+			edadTotal = calcularTotal(edadTotal, edades, cantidad);
+		} else {
+			while (edades <= 0 || isNaN(edades)) {
+				alert(
+					'Ha introducido un valor erroneo.'
+				);
+				edades = Number(
+					prompt('Ingrese su edad ' + i + ':')
+				);
+			}
+			edadTotal = calcularTotal(edadTotal, edades, cantidad);
+		}
+	}
+	mostrarTotal(edadTotal, cantidad);
+};
+
+const calcularTotal = (edadTotal, edades, cantidad) =>
+	((edadTotal + edades) / cantidad);
+
+const mostrarTotal = (edadTotal, cantidad) => {
+	console.log(`La cantidad de personas es ${cantidad}`);
+	console.log(`El promedio de edades es ${edadTotal}`);
+};
+
+cantidadPersonas();
